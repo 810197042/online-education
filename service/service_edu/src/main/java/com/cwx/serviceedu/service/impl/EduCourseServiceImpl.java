@@ -8,6 +8,7 @@ import com.cwx.serviceedu.entity.EduCourse;
 import com.cwx.serviceedu.entity.EduCourseDescription;
 import com.cwx.serviceedu.entity.EduVideo;
 import com.cwx.serviceedu.entity.frontVo.CourseFrontVo;
+import com.cwx.serviceedu.entity.frontVo.CourseWebVo;
 import com.cwx.serviceedu.entity.vo.CourseInfoVo;
 import com.cwx.serviceedu.entity.vo.CoursePublishVo;
 import com.cwx.serviceedu.mapper.EduCourseDescriptionMapper;
@@ -164,5 +165,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         map.put("hasPrevious", hasPrevious);
 
         return map;
+    }
+
+    @Override
+    public CourseWebVo getCourseWebVo(String courseId) {
+        CourseWebVo courseWebVo = baseMapper.getCourseWebVo(courseId);
+        return courseWebVo;
     }
 }

@@ -1,11 +1,19 @@
 package com.cwx.orderservice.controller;
 
 
-import com.cwx.commonutils.JwtUtils;
-import com.cwx.commonutils.R;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.cwx.commonutils.feignclient.EduClient;
+import com.cwx.commonutils.feignclient.UcenterClient;
+import com.cwx.commonutils.user.CourseWebVoOrder;
+import com.cwx.commonutils.user.UcenterMemberOrder;
 import com.cwx.orderservice.entity.Order;
 import com.cwx.orderservice.service.OrderService;
+import com.cwx.commonutils.JwtUtils;
+import com.cwx.commonutils.R;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,38 +35,33 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    //1.生成订单的方法
-    @PostMapping("createOrder/{courseId}")
-    public R createOrder(@PathVariable String courseId, HttpServletRequest request){
-        String memberId = JwtUtils.getMemberIdByJwtToken(request);
-        //创建订单，返回订单号
-        String orderNo = orderService.createOrders(courseId,memberId);
-        return R.ok().data("orderId",orderNo);
+    @Autowired
+    private EduClient eduClient;
+
+    @Autowired
+    private UcenterClient ucenterClient;
+
+    @PostMapping("/createOrder/{courseId}")
+    @ApiOperation("根据课程id生成订单")
+    public R createOrder(@PathVariable String courseId, HttpServletRequest request) {
+        String orderId = orderService.createOrders(courseId, JwtUtils.getMemberIdByJwtToken(request));
+        return R.ok().data("orderId", orderId);
     }
 
-    //2.根据订单id查询
-    @GetMapping("getOrderInfo/{orderId}")
-    public R getOrderInfo(@PathVariable String orderId){
-        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("order_no",orderId);
-        Order orderInfo = orderService.getOne(queryWrapper);
-        return R.ok().data("item",orderInfo);
+    @GetMapping("/getOrderInfo/{orderNo}")
+    @ApiOperation("根据订单号查订单信息")
+    public R getOrderInfo(@PathVariable String orderNo) {
+        LambdaQueryWrapper<Order> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Order::getOrderNo, orderNo);
+        Order one = orderService.getOne(lambdaQueryWrapper);
+        return R.ok().data("item", one);
     }
 
-    //3.根据课程Id和用户ID查询订单表中的订单状态
-    @GetMapping("isBuyCourse/{courseId}/{memberId}")
-    public boolean isBuyCourse(@PathVariable String courseId,
-                               @PathVariable String memberId){
-        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("course_id",courseId);
-        queryWrapper.eq("member_id",memberId);
-        queryWrapper.eq("status",1);
-        int count = orderService.count(queryWrapper);
-        if (count>0){
-            return true;
-        }else {
-            return false;
-        }
+    @GetMapping("/isBuyCourse/{courseId}/{memberId}")
+    @ApiOperation("根据课程id和用户id查询订单表中订单状态")
+    public boolean isBuyCourse(@PathVariable("courseId") String courseId, @PathVariable("memberId") String memberId) {
+        boolean isBuy = orderService.isBuyCourse(courseId, memberId);
+        return isBuy;
     }
 
 

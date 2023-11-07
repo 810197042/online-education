@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,9 +24,6 @@ import java.util.Map;
  * <p>
  * 支付日志表 服务实现类
  * </p>
- *
- * @author atguigu
- * @since 2020-08-16
  */
 @Transactional
 @Service

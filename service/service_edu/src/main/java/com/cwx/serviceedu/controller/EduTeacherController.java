@@ -28,7 +28,7 @@ import java.util.List;
 @Api(description = "讲师管理")
 @RestController
 @CrossOrigin
-@RequestMapping("/eduservic/teacher")
+@RequestMapping("/eduservice/teacher")
 public class EduTeacherController {
 
     @Autowired

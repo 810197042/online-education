@@ -12,11 +12,11 @@
     <artifactId>service_acl</artifactId>
 
     <dependencies>
-        <!--<dependency>
+        <dependency>
             <groupId>com.cwx</groupId>
             <artifactId>spring_security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>

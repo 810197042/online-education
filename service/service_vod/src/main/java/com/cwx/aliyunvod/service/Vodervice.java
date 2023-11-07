@@ -1,5 +1,6 @@
 package com.cwx.aliyunvod.service;
 
+import com.aliyuncs.exceptions.ClientException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
@@ -12,4 +13,6 @@ public interface Vodervice {
     void removeAliVideo(String id);
 
     void removeAliVideos(List<String> videoIdList);
+
+    String getPlayAuth(String id) throws ClientException;
 }

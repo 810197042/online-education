@@ -9,6 +9,8 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.cwx.aliyunvod.Utils.ConstantProperties;
 import com.cwx.aliyunvod.service.Vodervice;
 import com.cwx.servicebase.exceptionhandler.MyException;
@@ -97,6 +99,21 @@ public class VodServiceImpl implements Vodervice {
             System.out.println("ErrMsg:" + e.getErrMsg());
             System.out.println("RequestId:" + e.getRequestId());
             throw new MyException(20001, "批量删除视频失败");
+        }
+    }
+
+    @Override
+    public String getPlayAuth(String id) {
+        try {
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+            GetVideoPlayAuthResponse response = new GetVideoPlayAuthResponse();
+            request.setVideoId(id);
+            response = client.getAcsResponse(request);
+            System.out.println("playAuth:" + response.getPlayAuth());
+            return response.getPlayAuth();
+        }
+        catch (Exception e) {
+            throw new MyException(20001, "获取凭证失败");
         }
     }
 }

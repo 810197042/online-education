@@ -2,8 +2,11 @@ package com.cwx.serviceedu.mapper;
 
 import com.cwx.serviceedu.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cwx.serviceedu.entity.frontVo.CourseWebVo;
 import com.cwx.serviceedu.entity.vo.CoursePublishVo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,4 +19,6 @@ import org.apache.ibatis.annotations.Param;
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
     CoursePublishVo getCoursePushlishInfo(@Param(value = "id") String courseId);
+
+    CourseWebVo getCourseWebVo(@Param(value = "courseId") String courseId);
 }

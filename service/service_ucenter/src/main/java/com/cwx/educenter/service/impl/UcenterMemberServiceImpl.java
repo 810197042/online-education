@@ -19,9 +19,6 @@ import org.springframework.util.StringUtils;
  * <p>
  * 会员表 服务实现类
  * </p>
- *
- * @author atguigu
- * @since 2020-08-11
  */
 @Service
 public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, UcenterMember> implements UcenterMemberService {

@@ -1,13 +1,13 @@
 package com.cwx.staservice.service.impl;
 
 import com.cwx.commonutils.R;
-import com.cwx.commonutils.RandomUtil;
-import com.cwx.staservice.client.UcenterClient;
+
+import com.cwx.commonutils.feignclient.UcenterClient;
 import com.cwx.staservice.entity.StatisticsDaily;
 import com.cwx.staservice.mapper.StatisticsDailyMapper;
-import com.cwx.staservice.service.StatisticsDailyService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cwx.staservice.service.StatisticsDailyService;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,6 @@ import java.util.Map;
  * <p>
  * 网站统计日数据 服务实现类
  * </p>
- *
- * @author atguigu
- * @since 2020-08-18
  */
 @Transactional
 @Service

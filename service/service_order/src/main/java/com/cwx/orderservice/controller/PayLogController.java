@@ -41,7 +41,7 @@ public class PayLogController {
         if (map == null){
             return R.error().message("支付出错了");
         }
-        //如果不为空，通过map获取订单状态;
+        //如果不为空，通过map获取订单状态，trade_state是官方返回的;
         if ("SUCCESS".equals(map.get("trade_state"))){
             //支付成功，更改订单状态
             payLogService.updateOrderStatus(map);

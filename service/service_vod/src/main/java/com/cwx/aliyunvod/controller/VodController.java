@@ -2,6 +2,8 @@ package com.cwx.aliyunvod.controller;
 
 import com.cwx.aliyunvod.service.Vodervice;
 import com.cwx.commonutils.R;
+import com.cwx.servicebase.exceptionhandler.MyException;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +46,18 @@ public class VodController {
         vodervice.removeAliVideos(videoIdList);
         return R.ok();
     }
+
+    @GetMapping("/getPlayAuth/{id}")
+    @ApiOperation("根据视频id获取凭证")
+    public R getPlayAuth(@PathVariable String id) {
+        String auth = null;
+        try {
+            auth = vodervice.getPlayAuth(id);
+        }
+        catch (Exception e) {
+            return R.error();
+        }
+        return R.ok().data("playAuth", auth);
+    }
+
 }

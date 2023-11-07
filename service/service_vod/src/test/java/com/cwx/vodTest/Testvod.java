@@ -26,10 +26,9 @@ public class Testvod {
 
         String title = "ZARD - Forever you.mp3";   //上传之后文件名称
         String fileName = "E:/MP3/ZARD - Forever you.mp3";  //本地文件路径和名称
-
     //    getPlayAuth();
       //  getPlayUrl();
-        testUploadVideo(accessKeyId, accessKeySecret, "ZARD - Forever you.mp3", fileName);
+        //testUploadVideo(accessKeyId, accessKeySecret, "ZARD - Forever you.mp3", fileName);
        // InputStream inputStream = new FileInputStream(fileName);
         //testUploadStream(accessKeyId, accessKeySecret, title, fileName, inputStream);
     }

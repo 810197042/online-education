@@ -1,7 +1,8 @@
 package com.cwx.orderservice.service;
 
-import com.cwx.orderservice.entity.Order;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cwx.orderservice.entity.Order;
 
 /**
  * <p>
@@ -14,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface OrderService extends IService<Order> {
 
     String createOrders(String courseId, String memberId);
+
+    boolean isBuyCourse(String courseId, String memberId);
 }

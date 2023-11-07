@@ -2,7 +2,7 @@ package com.cwx.staservice.controller;
 
 
 import com.cwx.commonutils.R;
-import com.cwx.staservice.client.UcenterClient;
+
 import com.cwx.staservice.service.StatisticsDailyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,11 @@
 package com.cwx.orderservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.cwx.commonutils.feignclient.EduClient;
+import com.cwx.commonutils.feignclient.UcenterClient;
 import com.cwx.commonutils.user.CourseWebVoOrder;
 import com.cwx.commonutils.user.UcenterMemberOrder;
-import com.cwx.orderservice.client.EduClient;
-import com.cwx.orderservice.client.UcenterClient;
+
 import com.cwx.orderservice.entity.Order;
 import com.cwx.orderservice.mapper.OrderMapper;
 import com.cwx.orderservice.service.OrderService;
@@ -17,9 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>
  * 订单 服务实现类
  * </p>
- *
- * @author atguigu
- * @since 2020-08-16
  */
 @Transactional
 @Service
@@ -57,5 +56,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         //返回订单号
         return order.getOrderNo();
+    }
+
+    @Override
+    public boolean isBuyCourse(String courseId, String memberId) {
+        LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Order::getCourseId, courseId);
+        queryWrapper.eq(Order::getMemberId, memberId);
+        queryWrapper.eq(Order::getStatus, 1);
+        int count = baseMapper.selectCount(queryWrapper);
+        return count > 0;
     }
 }

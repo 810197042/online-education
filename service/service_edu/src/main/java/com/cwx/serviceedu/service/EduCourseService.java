@@ -3,6 +3,7 @@ package com.cwx.serviceedu.service;
 import com.cwx.serviceedu.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cwx.serviceedu.entity.frontVo.CourseFrontVo;
+import com.cwx.serviceedu.entity.frontVo.CourseWebVo;
 import com.cwx.serviceedu.entity.vo.CourseInfoVo;
 import com.cwx.serviceedu.entity.vo.CoursePublishVo;
 
@@ -32,4 +33,6 @@ public interface EduCourseService extends IService<EduCourse> {
     List<EduCourse> seletTop8Courses();
 
     Map<String, Object> getFrontCourseList(long page, long limit, CourseFrontVo courseFrontVo);
+
+    CourseWebVo getCourseWebVo(String courseId);
 }

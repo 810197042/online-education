@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableDiscoveryClient
 @EnableFeignClients    //服务调用
-@ComponentScan("com.atguigu")
+@ComponentScan("com.cwx")
 @SpringBootApplication//取消数据源自动配置
-@MapperScan("com.atguigu.staservice.mapper")
+@MapperScan("com.cwx.staservice.mapper")
 public class StaApplication {
     public static void main(String[] args) {
         SpringApplication.run(StaApplication.class, args);
