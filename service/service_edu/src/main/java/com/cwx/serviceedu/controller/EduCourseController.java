@@ -25,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/eduservice/course")
-@CrossOrigin
+//@CrossOrigin
 public class EduCourseController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class EduCourseController {
 
 
     //条件查询+分页
-    @GetMapping("/{cur}/{size}")
+    @PostMapping("/pageCourseCondition/{cur}/{size}")
     @ApiOperation(value = "条件查询+分页")
     public R getCoursePage(@RequestBody(required = false) EduCourse eduCourse, @PathVariable("cur") int cur, @PathVariable("size") int size) {
         Page<EduCourse> page = new Page<>(cur, size);
@@ -42,8 +42,9 @@ public class EduCourseController {
             queryWrapper.like(!StringUtils.isEmpty(eduCourse.getTitle()), EduCourse::getTitle, eduCourse.getTitle());
             queryWrapper.eq(!StringUtils.isEmpty(eduCourse.getStatus()), EduCourse::getStatus, eduCourse.getStatus());
         }
+        queryWrapper.orderByDesc(EduCourse::getGmtModified);
         eduCourseService.page(page, queryWrapper);
-        return R.ok().data("list", page);
+        return R.ok().data("total", page.getTotal()).data("rows", page.getRecords());
     }
 
     @PostMapping("/addCourseInfo")

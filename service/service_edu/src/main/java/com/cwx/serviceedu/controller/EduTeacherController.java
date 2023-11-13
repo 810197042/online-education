@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(description = "讲师管理")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/eduservice/teacher")
 public class EduTeacherController {
 
@@ -96,12 +96,6 @@ public class EduTeacherController {
     @GetMapping("/getTeacher/{id}")
     public R getTeacher(@PathVariable String id) {
         EduTeacher eduTeacher = teacherService.getById(id);
-        try {
-            int i = 1/0;
-        }
-        catch (Exception e) {
-            throw new MyException(20001, "自定义异常");
-        }
         return R.ok().data("teacher", eduTeacher);
     }
 

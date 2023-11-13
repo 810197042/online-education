@@ -15,7 +15,6 @@ import java.util.List;
  * <p>
  * 安全认证用户详情信息
  * </p>
-
  */
 @Data
 @Slf4j

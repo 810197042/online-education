@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/admin/acl/index")
 //@CrossOrigin
 public class IndexController {
-
+//zxczxcac
     @Autowired
     private IndexService indexService;
 
@@ -30,6 +30,7 @@ public class IndexController {
         Map<String, Object> userInfo = indexService.getUserInfo(username);
         return R.ok().data(userInfo);
     }
+
 
     /**
      * 获取菜单

@@ -1,7 +1,6 @@
 package com.cwx.orderservice.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cwx.commonutils.exceptionhandler.GuliException;
 import com.cwx.orderservice.entity.Order;
 import com.cwx.orderservice.entity.PayLog;
 import com.cwx.orderservice.mapper.PayLogMapper;
@@ -10,6 +9,7 @@ import com.cwx.orderservice.service.PayLogService;
 import com.cwx.orderservice.utils.HttpClient;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cwx.servicebase.exceptionhandler.MyException;
 import com.github.wxpay.sdk.WXPayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,7 +80,7 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
             return map;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new GuliException(20001, "获取二维码失败");
+            throw new MyException(20001, "获取二维码失败");
         }
     }
 

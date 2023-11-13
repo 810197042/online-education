@@ -19,7 +19,7 @@ import java.util.List;
  @description: */
 @RestController
 @RequestMapping("/educms/bannerfront")
-@CrossOrigin
+//@CrossOrigin
 public class BannerFrontController {
     @Autowired
     private CrmBannerService crmBannerService;

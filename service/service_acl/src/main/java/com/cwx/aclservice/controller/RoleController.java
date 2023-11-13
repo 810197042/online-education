@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/admin/acl/role")
 //@CrossOrigin
 public class RoleController {
-
+//asdasdasdzxczxc
     @Autowired
     private RoleService roleService;
 

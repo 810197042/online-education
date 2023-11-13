@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 @Controller//只请求地址，不返回数据
 @RequestMapping("/api/ucenter/wx")
-@CrossOrigin
+//@CrossOrigin
 public class WxApiController {
     @Autowired
     private UcenterMemberService ucenterMemberService;

@@ -20,7 +20,7 @@ import java.util.List;
  @description: */
 @RestController
 @RequestMapping("/eduservice/indexfront")
-@CrossOrigin
+//@CrossOrigin
 public class IndexFrontController {
 
     @Autowired
