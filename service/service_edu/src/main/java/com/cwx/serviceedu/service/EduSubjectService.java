@@ -20,4 +20,6 @@ public interface EduSubjectService extends IService<EduSubject> {
     void addSubject(MultipartFile file);
 
     List<OneSubject> getAllSubject();
+
+    void removeRootAndChildrenById(String id);
 }

@@ -14,6 +14,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -72,6 +74,24 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
             res.add(one);
         }
         return res;
+    }
+
+    @Transactional(rollbackFor = MyException.class)
+    @Override
+    public void removeRootAndChildrenById(String id) {
+        List<EduSubject> subjects = eduSubjectService.list();
+        deleteRootAndChildren(subjects, id);
+    }
+
+    public void deleteRootAndChildren(List<EduSubject> subjects, String id) {
+        for (EduSubject subject : subjects) {
+            if (subject.getParentId().equals(id)) {
+                deleteRootAndChildren(subjects, subject.getId());
+            }
+        }
+        if (!eduSubjectService.removeById(id)) {
+            throw new MyException(20001, "删除subject失败");
+        }
     }
 
 

@@ -34,7 +34,7 @@ public class EduTeacherController {
     @Autowired
     private EduTeacherService teacherService;
 
-    @GetMapping("/findAll")
+    @GetMapping()
     public R findAllTeacher() {
         List<EduTeacher> list = teacherService.list();
         R r = R.ok().data("items", list);
@@ -49,7 +49,7 @@ public class EduTeacherController {
     }
 
     //分页查询
-    @GetMapping("/pageTeacher/{current}/{limit}")
+    @PostMapping("/pageList/{current}/{limit}")
     @ApiOperation(value = "分页查询讲师")
     public R pageListTeacher(@PathVariable Long current, @PathVariable Long limit) {
         Page<EduTeacher>pageTeacher = new Page<>(current, limit);
@@ -57,14 +57,14 @@ public class EduTeacherController {
         long total = pageTeacher.getTotal();
         List<EduTeacher> records = pageTeacher.getRecords();
         //return R.ok().data("results", pageTeacher);
-        return R.ok().data("total", total).data("rows", records);
+        return R.ok().data("total", total).data("items", records);
     }
 
     @ApiOperation(value = "条件带分页查询讲师")
-    @PostMapping("/pageTeacherCondition/{current}/{limit}")
-    public R pageTeacherCondition(@PathVariable Long current, @PathVariable Long limit,
+    @PostMapping("/moreConditionPageList/{page}/{limit}")
+    public R pageTeacherCondition(@PathVariable("page") int page, @PathVariable("limit") int limit,
     @RequestBody(required = false) TeachQuery teachQuery) {
-        Page<EduTeacher> pageTeacher = new Page<>(current, limit);
+        Page<EduTeacher> pageTeacher = new Page<>(page, limit);
 
         LambdaQueryWrapper<EduTeacher> queryWrapper = new LambdaQueryWrapper<>();
         if (teachQuery != null) {
@@ -80,11 +80,11 @@ public class EduTeacherController {
         teacherService.page(pageTeacher, queryWrapper);
         long total = pageTeacher.getTotal();
         List<EduTeacher> records = pageTeacher.getRecords();
-        return R.ok().data("total", total).data("rows", records);
+        return R.ok().data("total", total).data("items", records);
     }
 
     @ApiOperation(value = "添加讲师")
-    @PostMapping("/addTeacher")
+    @PostMapping("/saveTeacher")
     public R addTeacher(@RequestBody EduTeacher eduTeacher) {
         if (teacherService.save(eduTeacher)) {
             return R.ok();
@@ -93,10 +93,10 @@ public class EduTeacherController {
     }
 
     @ApiOperation(value = "根据ID查讲师")
-    @GetMapping("/getTeacher/{id}")
+    @GetMapping("/getTeacherInfo/{id}")
     public R getTeacher(@PathVariable String id) {
         EduTeacher eduTeacher = teacherService.getById(id);
-        return R.ok().data("teacher", eduTeacher);
+        return R.ok().data("eduTeacher", eduTeacher);
     }
 
     @ApiOperation(value = "修改讲师")

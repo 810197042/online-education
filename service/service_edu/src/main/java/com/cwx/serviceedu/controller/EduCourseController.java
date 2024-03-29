@@ -33,7 +33,7 @@ public class EduCourseController {
 
 
     //条件查询+分页
-    @PostMapping("/pageCourseCondition/{cur}/{size}")
+    @PostMapping("/moreConditionPageList/{cur}/{size}")
     @ApiOperation(value = "条件查询+分页")
     public R getCoursePage(@RequestBody(required = false) EduCourse eduCourse, @PathVariable("cur") int cur, @PathVariable("size") int size) {
         Page<EduCourse> page = new Page<>(cur, size);
@@ -44,10 +44,10 @@ public class EduCourseController {
         }
         queryWrapper.orderByDesc(EduCourse::getGmtModified);
         eduCourseService.page(page, queryWrapper);
-        return R.ok().data("total", page.getTotal()).data("rows", page.getRecords());
+        return R.ok().data("total", page.getTotal()).data("items", page.getRecords());
     }
 
-    @PostMapping("/addCourseInfo")
+    @PostMapping()
     @ApiOperation(value = "传入courseVo对象，同时插入course和description表")
     public R addCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
         eduCourseService.addCourseInfo(courseInfoVo);
@@ -58,7 +58,7 @@ public class EduCourseController {
     @ApiOperation(value = "查询courseVo对象")
     public R getCourseInfo(@PathVariable(value = "courseId") String courseId) {
         CourseInfoVo courseInfoVo = eduCourseService.getCourseInfoVo(courseId);
-        return R.ok().data("courseInfoVo", courseInfoVo);
+        return R.ok().data("courseInfoForm", courseInfoVo);
     }
 
     @PostMapping("/updateCourseInfo")
@@ -85,7 +85,7 @@ public class EduCourseController {
         return R.ok();
     }
 
-    @DeleteMapping("/{courseId}")
+    @DeleteMapping("/deleteCourseById/{courseId}")
     @ApiOperation(value = "删除课程，同时删除简介、视频、章节、小节")
     public R deleteCourse(@PathVariable String courseId) {
         eduCourseService.deleteCourse(courseId);

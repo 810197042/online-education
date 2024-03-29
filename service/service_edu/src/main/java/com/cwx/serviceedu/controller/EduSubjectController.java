@@ -2,6 +2,7 @@ package com.cwx.serviceedu.controller;
 
 
 import com.cwx.commonutils.R;
+import com.cwx.serviceedu.entity.EduSubject;
 import com.cwx.serviceedu.entity.subject.OneSubject;
 import com.cwx.serviceedu.service.EduSubjectService;
 import io.swagger.annotations.Api;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.security.auth.Subject;
 import java.util.List;
 
 /**
@@ -38,11 +40,31 @@ public class EduSubjectController {
         return R.ok();
     }
 
-    @GetMapping("/getAllSubject")
+    @PostMapping("/addOneLevel")
+    public R addOneSubject(@RequestBody EduSubject subject) {
+        subject.setParentId("0");
+        eduSubjectService.save(subject);
+        return R.ok();
+    }
+
+    @PostMapping("/addTwoLevel")
+    public R addTwoSubject(@RequestBody EduSubject subject) {
+        subject.setSort(1);
+        eduSubjectService.save(subject);
+        return R.ok();
+    }
+
+    @GetMapping()
     @ApiOperation(value = "课程分类显示")
     public R getAllSubject() {
         List<OneSubject> res = eduSubjectService.getAllSubject();
-        return R.ok().data("list", res);
+        return R.ok().data("OneSubjectDto", res);
+    }
+
+    @DeleteMapping("/{id}")
+    public R deleteSubject(@PathVariable String id) {
+        eduSubjectService.removeRootAndChildrenById(id);
+        return R.ok();
     }
 }
 
