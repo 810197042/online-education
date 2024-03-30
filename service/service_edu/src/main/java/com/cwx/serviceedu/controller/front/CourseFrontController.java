@@ -9,6 +9,7 @@ import com.cwx.serviceedu.entity.frontVo.CourseFrontVo;
 import com.cwx.serviceedu.entity.frontVo.CourseWebVo;
 import com.cwx.serviceedu.service.EduChapterService;
 import com.cwx.serviceedu.service.EduCourseService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.Map;
  @description: */
 @RestController
 @RequestMapping("/eduservice/coursefront")
+@Api(description = "前台课程模块")
 //@CrossOrigin
 public class CourseFrontController {
 

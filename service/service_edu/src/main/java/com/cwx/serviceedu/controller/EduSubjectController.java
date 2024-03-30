@@ -23,7 +23,7 @@ import java.util.List;
  * @author cwx
  * @since 2023-10-25
  */
-@Api(description = "课程管理")
+@Api(description = "学科管理")
 @RestController
 @RequestMapping("/eduservice/subject")
 //@CrossOrigin
@@ -41,6 +41,7 @@ public class EduSubjectController {
     }
 
     @PostMapping("/addOneLevel")
+    @ApiOperation(value = "增加一级subject")
     public R addOneSubject(@RequestBody EduSubject subject) {
         subject.setParentId("0");
         eduSubjectService.save(subject);
@@ -48,6 +49,7 @@ public class EduSubjectController {
     }
 
     @PostMapping("/addTwoLevel")
+    @ApiOperation(value = "增加二级subject,pid是父级subject")
     public R addTwoSubject(@RequestBody EduSubject subject) {
         subject.setSort(1);
         eduSubjectService.save(subject);
@@ -62,6 +64,7 @@ public class EduSubjectController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "根据id删除subject，同时递归删除所有子subject")
     public R deleteSubject(@PathVariable String id) {
         eduSubjectService.removeRootAndChildrenById(id);
         return R.ok();

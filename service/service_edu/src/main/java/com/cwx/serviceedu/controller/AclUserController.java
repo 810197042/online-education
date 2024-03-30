@@ -27,13 +27,22 @@ public class AclUserController {
 
     //login
     @PostMapping("/login")
-    public R login(String password, String username) {
-        return R.ok().data("token", "admin");
+    public R login(@RequestBody AclUser user) {
+        if ("admin".equals(user.getUsername()) && "admin".equals(user.getPassword())) {
+            return R.ok().data("token", "admin");
+        }
+        return R.error();
     }
 
     //info
     @GetMapping("/info")
     public R info() {
-        return R.ok().data("roles", "admin").data("username", "admin").data("avatar", "https://t7.baidu.com/it/u=2604797219,1573897854&fm=193&f=GIF");
+        return R.ok().data("roles", "admin").data("name", "admin").data("avatar", "https://t7.baidu.com/it/u=2604797219,1573897854&fm=193&f=GIF");
     }
+
+    @PostMapping("/logout")
+    public R logout() {
+        return R.ok();
+    }
+
 }

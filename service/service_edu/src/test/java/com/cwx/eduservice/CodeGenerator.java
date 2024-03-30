@@ -16,6 +16,9 @@ import com.cwx.serviceedu.entity.excel.EasyExcelSubject;
 import com.cwx.serviceedu.entity.EduSubject;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CodeGenerator {
 
     @Test
@@ -104,4 +107,6 @@ public class CodeGenerator {
         oneSubject.setTitle("title");
         //eduSubjectService.save(oneSubject);
     }
+
+
 }

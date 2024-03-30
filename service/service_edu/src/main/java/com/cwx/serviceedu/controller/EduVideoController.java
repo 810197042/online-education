@@ -4,6 +4,7 @@ package com.cwx.serviceedu.controller;
 import com.cwx.commonutils.R;
 import com.cwx.serviceedu.entity.EduVideo;
 import com.cwx.serviceedu.service.EduVideoService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/eduservice/video")
+@Api(description = "小节管理")
 //@CrossOrigin
 public class EduVideoController {
 

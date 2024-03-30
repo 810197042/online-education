@@ -19,6 +19,7 @@ import java.util.List;
  @description: */
 @RestController
 @RequestMapping("/eduvod/video")
+@Api("VOD模块")
 //@CrossOrigin
 public class VodController {
 

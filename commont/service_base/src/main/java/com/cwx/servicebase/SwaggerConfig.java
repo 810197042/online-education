@@ -32,7 +32,7 @@ public class SwaggerConfig {
 
         return new ApiInfoBuilder()
                 .title("网站-课程中心API文档")
-                .description("本文档描述了课程中心微服务接口定义")
+                .description("本文档描述了课程中心微服务接口定义，测试的时候不要写gmtModified和gmtCreate，插入操作不要写id，这些是自动生成的")
                 .version("1.0")
                 .contact(new Contact("java", "http://cwx.com", "810197042@qq.com"))
                 .build();

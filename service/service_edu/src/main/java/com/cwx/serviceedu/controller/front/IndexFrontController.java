@@ -5,6 +5,7 @@ import com.cwx.serviceedu.entity.EduCourse;
 import com.cwx.serviceedu.entity.EduTeacher;
 import com.cwx.serviceedu.service.EduCourseService;
 import com.cwx.serviceedu.service.EduTeacherService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,7 @@ import java.util.List;
  @description: */
 @RestController
 @RequestMapping("/eduservice/indexfront")
+@Api(description = "热门课程和讲师")
 //@CrossOrigin
 public class IndexFrontController {
 

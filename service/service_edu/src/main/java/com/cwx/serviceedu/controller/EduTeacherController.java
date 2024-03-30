@@ -35,6 +35,7 @@ public class EduTeacherController {
     private EduTeacherService teacherService;
 
     @GetMapping()
+    @ApiOperation(value = "获取所有讲师")
     public R findAllTeacher() {
         List<EduTeacher> list = teacherService.list();
         R r = R.ok().data("items", list);

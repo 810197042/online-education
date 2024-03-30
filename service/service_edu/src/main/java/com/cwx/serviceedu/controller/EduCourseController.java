@@ -8,6 +8,7 @@ import com.cwx.serviceedu.entity.EduCourse;
 import com.cwx.serviceedu.entity.vo.CourseInfoVo;
 import com.cwx.serviceedu.entity.vo.CoursePublishVo;
 import com.cwx.serviceedu.service.EduCourseService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/eduservice/course")
+@Api(description = "课程管理")
 //@CrossOrigin
 public class EduCourseController {
 
@@ -68,7 +70,7 @@ public class EduCourseController {
         return R.ok();
     }
 
-    @GetMapping("/getPublishCourseInfo/{courseId}")
+    @GetMapping("/getAllCourseInfo/{courseId}")
     @ApiOperation(value = "查询课程发布信息")
     public R getCoursePublishVo(@PathVariable String courseId) {
         CoursePublishVo coursePushlishInfo = eduCourseService.getCoursePushlishInfo(courseId);
